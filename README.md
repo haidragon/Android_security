@@ -1,5 +1,7 @@
 # Android_security
 
+## Android的功能
+
 ## 语言
        c、c++、java、javascript、python、scala、smali
 ## 技能
