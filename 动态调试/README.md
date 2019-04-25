@@ -4,4 +4,6 @@
 
 * huaweimusic动态调试
 
-* ddctf安卓RSA-ida
+* 编写apk来动态调试
+
+* JNI本地编程开发
