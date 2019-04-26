@@ -1,9 +1,9 @@
 # 动态调试
 
-* adb动态调试
-
 * huaweimusic动态调试
 
-* 编写apk来动态调试
+* 强大的IDA
 
-* JNI本地编程开发
+* Android软件安全与逆向分析
+    TODO:
+	https://blog.csdn.net/jiangwei0910410003/article/details/51500328

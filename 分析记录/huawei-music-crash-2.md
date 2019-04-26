@@ -17,7 +17,7 @@ Segmentation fault (core dumped)
 root@9b798cc2ff72:/tmp/tool/MAC_SDK_448# gdb ./mac 
 
 gdb-peda$ set args ./fuzz_out/crashes/id\:000001\,sig\:11\,src\:000000\,op\:flip1\,pos\:5 test.wav -d
-gdb-peda$ b main
+gdb-peda$ b main 
 Breakpoint 1 at 0x408d7e: file Source/Console/Console.cpp, line 126.
 gdb-peda$ run
 gdb-peda$ c
