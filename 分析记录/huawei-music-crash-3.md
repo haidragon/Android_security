@@ -84,3 +84,76 @@
 	Breakpoint 1 at 0x408d7e: file Source/Console/Console.cpp, line 126.
 	gdb-peda$ run
 	gdb-peda$ c
+
+Stopped reason: SIGABRT
+0x00007ffff725c428 in __GI_raise (sig=sig@entry=0x6) at ../sysdeps/unix/sysv/linux/raise.c:54
+54	../sysdeps/unix/sysv/linux/raise.c: No such file or directory.
+gdb-peda$ l
+49	in ../sysdeps/unix/sysv/linux/raise.c
+
+
+#0  0x00007ffff725c428 in __GI_raise (sig=sig@entry=0x6) at ../sysdeps/unix/sysv/linux/raise.c:54
+#1  0x00007ffff725e02a in __GI_abort () at abort.c:89
+#2  0x00007ffff729e7ea in __libc_message (do_abort=0x2, fmt=fmt@entry=0x7ffff73b7ed8 "*** Error in `%s': %s: 0x%s ***\n")
+    at ../sysdeps/posix/libc_fatal.c:175
+#3  0x00007ffff72a7dfb in malloc_printerr (ar_ptr=0x7ffff75ebb20 <main_arena>, ptr=0x64a220, 
+    str=0x7ffff73b4c75 "corrupted size vs. prev_size", action=0x3) at malloc.c:5006
+#4  _int_free (av=0x7ffff75ebb20 <main_arena>, p=<optimized out>, have_lock=0x0) at malloc.c:4014
+#5  0x00007ffff72ab53c in  (mem=<optimized out>) at malloc.c:2968
+#6  0x00007ffff7bc3b34 in APE::CAPEDecompressCore::~CAPEDecompressCore (this=0x62f090, __in_chrg=<optimized out>)
+    at Source/MACLib/Old/APEDecompressCore.cpp:49
+#7  0x00007ffff7bc6668 in APE::CUnMAC::Uninitialize (this=0x620d20) at Source/MACLib/Old/UnMAC.cpp:96
+#8  0x00007ffff7bc6508 in APE::CUnMAC::~CUnMAC (this=0x620d20, __in_chrg=<optimized out>)
+    at Source/MACLib/Old/UnMAC.cpp:53
+#9  0x00007ffff7bc4a7b in APE::CAPEDecompressOld::~CAPEDecompressOld (this=0x620cd0, __in_chrg=<optimized out>)
+    at Source/MACLib/Old/APEDecompressOld.cpp:46
+#10 0x00007ffff7bc4b12 in APE::CAPEDecompressOld::~CAPEDecompressOld (this=0x620cd0, __in_chrg=<optimized out>)
+    at Source/MACLib/Old/APEDecompressOld.cpp:49
+#11 0x00007ffff7badb2f in APE::CSmartPtr<APE::IAPEDecompress>::Delete (this=0x7fffffffe390) at Source/Shared/SmartPtr.h:56
+#12 0x00007ffff7bad3af in DecompressCore (pInputFilename=0x61b030 L"tempfile.ape", 
+    pOutputFilename=0x61b070 L"tempoutputfl", nOutputMode=0x1, nCompressionLevel=0xffffffff, 
+    pProgressCallback=0x7fffffffe480) at Source/MACLib/APESimple.cpp:489
+#13 0x00007ffff7bac2fc in DecompressFileW2 (pInputFilename=0x61b030 L"tempfile.ape", 
+    pOutputFilename=0x61b070 L"tempoutputfl", pProgressCallback=0x7fffffffe480) at Source/MACLib/APESimple.cpp:322
+#14 0x00007ffff7bab21b in DecompressFileW (pInputFilename=0x61b030 L"tempfile.ape", 
+    pOutputFilename=0x61b070 L"tempoutputfl", pPercentageDone=0x7fffffffe4ec, 
+    ProgressCallback=0x40450e <ProgressCallback(int)>, pKillFlag=0x7fffffffe4f0) at Source/MACLib/APESimple.cpp:102
+#15 0x00000000004048dc in main (argc=0x4, argv=0x7fffffffe6d8) at Source/Console/Console.cpp:262
+#16 0x00007ffff7247830 in __libc_start_main (main=0x40463c <main(int, char**)>, argc=0x4, argv=0x7fffffffe6d8, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffe6c8)
+    at ../csu/libc-start.c:291
+#17 0x0000000000402579 in _start ()
+
+/*****************************************************************************************
+Uninitialize
+*****************************************************************************************/
+int CUnMAC::Uninitialize() 
+{
+    if (m_bInitialized) 
+    {
+        SAFE_DELETE(m_pAPEDecompressCore)
+        SAFE_DELETE(m_pPrepare)
+        
+        // clear the APE info pointer
+        m_pAPEDecompress = NULL;
+
+        // set the last decoded frame again
+        m_LastDecodedFrameIndex = -1;
+
+        // set the initialized flag to false
+        m_bInitialized = false;
+    }
+
+    return ERROR_SUCCESS;
+}
+
+对于没有初始化的进行初始化，SAFE_DELETE的时候发生了错误
+
+ if (m_bInitialized)  
+
+gdb-peda$ p m_bInitialized
+$1 = 0x1 
+说明未初始化
+
+程序主动 abort 或者是 assert 导致的 crash
+

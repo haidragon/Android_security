@@ -1,6 +1,9 @@
 # Android_security
 
 ## Android的功能
+* Android生态圈
+TODO:
+* 各个组件，存的漏洞类型，这些漏洞的利用可能性有多大，被利用之后分别会产生什么样的效果
 
 ## 语言
        c、c++、java、javascript、python、scala、smali
@@ -14,10 +17,11 @@
 
 * ctf
 	看着做吧
+* CVE
 
 ## 分析记录
 
-## 动态调试
+## 动态调试(dynamic)
 	软件调试可以分为源码级调试与汇编级调试。源码级调试（代码审计）多用于软件开发阶段，汇编级调试也就是动态调试。
 
 ## 代码审计
@@ -32,6 +36,9 @@
 
 ## Fuzzing训练
 	已公开的历史漏洞问自己，如何写fuzzer挖掘到此漏洞，如果自己不知道此漏洞，那又能挖掘到呢？不断重复训练并改进fuzzer
+	甚至可以来一个议题，叫做： From open-source security to closed-source application
+	然后就发现，这个方向可以一直做下去，包括组件的识别啊，版本识别啊，开源闭源对应啊，爬虫扫描啊，漏洞模式，触发路径寻找啊，inter-device fuzzing啊
+	搞出个 exploit android app deep from the native world
 
 ## 漏洞信息来源
 	RSS、相关博文
@@ -45,4 +52,7 @@
 
 * Thor
 * fk项目（移动app分析）
-* huaweimusic
+* monkey(1个月)
+	ffmeg
+	chrome
+
