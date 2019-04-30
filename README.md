@@ -55,4 +55,8 @@ TODO:
 * monkey(1个月)
 	ffmeg
 	chrome
+* https://github.com/B3nac/Android-Reports-and-Resources
+
+## Mark
+wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
 

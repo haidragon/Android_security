@@ -52,6 +52,9 @@ ffmpeg -i input.mp4 output.avi
 转换成ape格式
 https://www.poweriso.com/tutorials/convert-to-ape.htm
 ======================
+转换成功，开始fuzz mac
+当时mac怎么fuzz... 来着...
+先用AFL编译mac，然后设置输入
 
 
 
