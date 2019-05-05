@@ -47,6 +47,11 @@ TODO:
 
 ## 工具与方法论沉淀
    一些漏洞可能需要人工审计，不少漏洞可以自动化Fuzzing，一些能自动化或半自动化实现的，尽量写程序自动化
+   * AFL源码解析
+   * google search
+   * 各组件漏洞积累
+   * Android软件安全与逆向分析
+   * 强大的IDA
 
 ## DOING
 
@@ -57,6 +62,11 @@ TODO:
 	chrome
 * https://github.com/B3nac/Android-Reports-and-Resources
 
+
 ## Mark
 wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
+Mico apk里面的 
+Lcom/facebook/ads/internal/hb b（unzip以及dex）
+Android软件安全与逆向分析中一些TODO的基础
+
 

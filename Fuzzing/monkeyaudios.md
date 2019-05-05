@@ -55,6 +55,18 @@ https://www.poweriso.com/tutorials/convert-to-ape.htm
 转换成功，开始fuzz mac
 当时mac怎么fuzz... 来着...
 先用AFL编译mac，然后设置输入
+afl-fuzz -m none -i fuzz_in/ -o fuzz_out/ ./mac @@
+
+size太大。
+优化afl-fuzz 
+	修改源码
+	定位报错信息
+	[-] PROGRAM ABORT : Test case 'fuzz_in//1.ape' is too big (19.1 MB, limit is 1.00 MB)
+         Location : read_testcases(), afl-fuzz.c:1472
+使用
+
+so wired,,,,input不少了，但是还是最终只跑一个路径 (odd,check syntax) 
+下一步，开始调试
 
 
 
