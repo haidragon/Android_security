@@ -24,7 +24,8 @@ ffmpeg
 A complete, cross-platform solution to record, convert and stream audio and video.
 
 ffmpeg -i input.mp4 output.avi
-我可以验证一下是否可以直接crash
+
+.
 ======================
 是否可以直接crash
 	sudo apt-get install ffmpeg
@@ -66,9 +67,18 @@ size太大。
 使用
 
 so wired,,,,input不少了，但是还是最终只跑一个路径 (odd,check syntax) 
-下一步，开始调试
+下一步，增加了一个解压的参数 -d
+fuzz 两天 34个crash 都被ffmpeg patch了
+是在那里patch的？ 调试ffmpeg  应该是ffmpeg做了检测了
 
+然后 改进 fuzz
+。。。。。
 
+我可以验证一下是否可以直接crash
+so stubid 。
+下载ffmpeg 用afl进行编译
+
+（我为什么要fuzz monkey audio？ 我想先跑出好多crash，再看那边行不行。 但是 直接fuzz ffmpeg不就解决了吗.... 问题在于 惯性思维， 以后做完了事情。要反思三次 并写出来 我做对了么，或者是否可以优化）
 
 # 联系方式
 	https://monkeysaudio.com/contact.html
