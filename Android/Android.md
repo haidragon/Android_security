@@ -41,6 +41,29 @@ Manifest文件中声明特定的组件时，可以指明一个Intent Filter，�
 #### Activity
 Activity是一种面向用户的应用组件或用户界面。基于Activity基类，包括一个窗口和相关的UI元素。Activity底层管理由被称为Activity管理服务的组件进行处理。这个组件也处理应用之间或应用内部用于调用Activity的发送Intent。
 
+##### activity中的常见配置：
+
+
+Lable属性：
+Activity页面的标题，界面的名字，如果此界面被创建快捷方式，则快捷方式的名字就是lable值
+Name属性：
+指定的值为:包名.Activity类名。
+包名如果与mainfest的package一致，可以用“.”代替。或者不写
+Intent-filter子节点：
+添加意图过滤，可以通过隐式意图启动。
+可以在桌面生成快捷方式，应用程序的入口
+Icon属性：
+指定应用程序的图标
+android：theme属性：指定主题
+android：theme="@android:style/Theme.Dialog"
+android：exported
+是否允许外部程序调用
+android:exported 是Android中的四大组件 Activity，Service，Provider，Receiver 四大组件中都会有的一个属性。
+总体来说它的主要作用是：是否支持其它应用调用当前组件。 
+默认值：如果包含有intent-filter 默认值为true; 没有intent-filter默认值为false。
+* ref
+https://blog.csdn.net/watermusicyes/article/details/46460347
+ 
 #### BroadcastReceiver
 在应用希望接收到一个匹配某种特定标准的隐式Intent时出现。例如，一个应用想要接受与短信息关联的Intent，它需要在Manifest文件中注册一个Receiver，使用Intent Filter来匹配动作。
 

@@ -80,6 +80,12 @@ so stubid 。
 
 （我为什么要fuzz monkey audio？ 我想先跑出好多crash，再看那边行不行。 但是 直接fuzz ffmpeg不就解决了吗.... 问题在于 惯性思维， 以后做完了事情。要反思三次 并写出来 我做对了么，或者是否可以优化）
 
+昨晚今天了fuzz。但是白fuzz了的感觉。都timeout了。 
+我需要进行改进，种子上面进行改进。
+找1M以下的音乐格式
+[～，785] [326,0]
+
+ 
 # 联系方式
 	https://monkeysaudio.com/contact.html
 	mail@monkeysaudio.com
