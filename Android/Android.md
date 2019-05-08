@@ -63,6 +63,11 @@ android:exported 是Android中的四大组件 Activity，Service，Provider，Re
 默认值：如果包含有intent-filter 默认值为true; 没有intent-filter默认值为false。
 * ref
 https://blog.csdn.net/watermusicyes/article/details/46460347
+
+android:enabled="true"
+* ref
+
+
  
 #### BroadcastReceiver
 在应用希望接收到一个匹配某种特定标准的隐式Intent时出现。例如，一个应用想要接受与短信息关联的Intent，它需要在Manifest文件中注册一个Receiver，使用Intent Filter来匹配动作。

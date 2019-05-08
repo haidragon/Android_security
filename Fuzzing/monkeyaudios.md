@@ -85,7 +85,10 @@ so stubid 。
 找1M以下的音乐格式
 [～，785] [326,0]
 
- 
+挖洞
+需不需要搞明白 ffmpeg里ape.c
+带着这个问题去审计代码（审计经过的那些代码）
+
 # 联系方式
 	https://monkeysaudio.com/contact.html
 	mail@monkeysaudio.com

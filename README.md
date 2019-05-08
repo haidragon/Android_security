@@ -57,10 +57,23 @@ TODO:
 
 * Thor
 * fk项目（移动app分析）
+
+### Fuzz
 * monkey(1个月)
-	ffmeg
-	chrome
+		ffmeg
+		chrome
+
+### 熟悉漏洞
+* 各组件漏洞积累
+	 快应用 instant app /攻击面 browser pwn
 * https://github.com/B3nac/Android-Reports-and-Resources
+* 复现搜狗浏览器 
+     替换了so 
+* 复现blueborne: 
+     http://www.ms509.com/2017/11/14/blueborne/ 
+     http://go.armis.com/hubfs/BlueBorne%20Technical%20White%20Paper.pdf 
+     android.googlesource.com 
+         system/bt 
 
 
 ## Mark
