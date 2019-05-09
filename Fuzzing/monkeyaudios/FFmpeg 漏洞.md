@@ -20,3 +20,22 @@ ref：
 https://www.freebuf.com/column/142775.html
 ppt：
 https://docs.google.com/presentation/d/1yqWy_aE3dQNXAhW8kxMxRqtP7qMHaIfMzUDpEqFneos/edit#slide=id.g1e10cfbccc_0_26
+
+5. Monkey's Audio
+Version 4.64 (April 15, 2019)
+Fixed: Tagging could crash.
+
+Version 4.57 (March 14, 2019)
+Fixed: Corrected a couple more corrupt file crash issues (thanks Piotr Pawlowski).
+
+Version 4.47 (February 24, 2019)
+Fixed: Corrected another crash bug in handling corrupt files.
+Fixed: Better handling of memory allocation errors.
+
+Version 4.45 (February 23, 2019)
+Fixed: Improved handling of corrupt APE files to avoid crashes (files with invalid blocks per frame, invalid block align, etc.).
+
+Version 4.39 (November 11, 2018)
+Fixed: A corrupt APE file with a negative number for the WAV header length could crash instead of being handled gracefully.
+Fixed: Corrected a couple compiler warnings.
+

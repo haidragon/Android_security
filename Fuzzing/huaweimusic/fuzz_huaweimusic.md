@@ -1,5 +1,4 @@
 # 环境
-ssh bobb@192.168.31.171
 docker run -i -t -v /root/xx:/xx --privileged=true fuzz_v1 /bin/bash 
 # 过程
 

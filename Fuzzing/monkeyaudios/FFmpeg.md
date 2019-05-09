@@ -21,7 +21,8 @@ ref https://blog.csdn.net/leixiaohua1020/article/details/12751349
 ref https://blog.csdn.net/hy119/article/details/81632662
 ref https://baike.baidu.com/item/ffmpeg/2665727?fr=aladdin
 * ffmpeg [global_options] {[input_file_options] -i input_url} ... {[output_file_options] output_url} ...
-	 _______              ______________
+
+'''	 _______              ______________
 	|       |            |              |
 	| input |  demuxer   | encoded data |   decoder
 	| file  | ---------> | packets      | -----+
@@ -37,7 +38,7 @@ ref https://baike.baidu.com/item/ffmpeg/2665727?fr=aladdin
 	| output | <-------- | encoded data | <----+
 	| file   |   muxer   | packets      |   encoder
 	|________|           |______________|
-
+'''
 
 ## libavformat
 demuxer 直接处理文件格式，把里面的各项内容都找出来

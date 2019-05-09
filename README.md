@@ -65,7 +65,7 @@ TODO:
 
 ### 熟悉漏洞
 * 各组件漏洞积累
-	 快应用 instant app /攻击面 browser pwn
+   每日一day
 * https://github.com/B3nac/Android-Reports-and-Resources
 * 复现搜狗浏览器 
      替换了so 
@@ -78,8 +78,11 @@ TODO:
 
 ## Mark
 wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
+
 Mico apk里面的 
+
 Lcom/facebook/ads/internal/hb b（unzip以及dex）
+
 Android软件安全与逆向分析中一些TODO的基础
 
 

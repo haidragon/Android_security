@@ -89,6 +89,8 @@ so stubid 。
 需不需要搞明白 ffmpeg里ape.c
 带着这个问题去审计代码（审计经过的那些代码）
 
+afl-cov
+
 # 联系方式
 	https://monkeysaudio.com/contact.html
 	mail@monkeysaudio.com
