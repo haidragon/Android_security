@@ -56,7 +56,7 @@ TODO:
 ## DOING
 
 * Thor
-* fk项目（移动app分析）
+* xxxx（移动app分析）
 
 ### Fuzz
 * monkey(1个月)
