@@ -1,5 +1,5 @@
 # Android_security
-
+仅为私人的成长笔记，记录下来，聊表心意。
 ## Android的功能
 * Android生态圈
 TODO:
