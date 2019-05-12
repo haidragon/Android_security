@@ -1,6 +1,16 @@
 # FFmpeg
 * https://blog.csdn.net/leixiaohua1020/article/list/2?t=1&
-雷神的blog
+
+> 雷神blog
+
+* https://blog.csdn.net/leixiaohua1020/article/details/44220151
+
+> 解码
+
+* https://blog.csdn.net/leixiaohua1020/article/details/44226355
+
+> 编码
+
 
 FFmpeg是一套可以用来记录、转换数字音频、视频，并能将其转化为流的开源计算机程序。它包括了领先的音/视频编码库libavcodec等。
 
@@ -96,6 +106,58 @@ ffmpeg库的实用：转码
 * 参考 最简单的基于FFMPEG的转码程序
 * 比较复杂的转码程序可以参考ffmpeg.c，它移植到MFC下的工程：ffmpeg转码器移植VC的工程：ffmpeg for MFC
 
-从软件功能划分软件结构
+### FFmpeg文件结构
+ref https://blog.csdn.net/zftzftzft/article/details/79569302
+* libavformat
 
-从功能结构划分工程架构
+	主要存放 ffmpeg 支持的 各种编解码器 的实现及 ffmpeg 编解码 功能相关的数
+'''
+    	文件						简要说明
+	allcodecs.c			  简单的注册类函数
+	avcodec.h			  编解码相关结构体定义和函数原型声明
+	dsputil.c			  限幅数组初始化
+	dsputil.h			  限幅数组声明
+	imgconvert.c		  颜色空间转换相关函数实现
+	imgconvert_template.h 颜色空间转换相关结构体定义和函数声明
+	utils_codec.c		  一些解码相关的工具类函数的实现
+	mpeg4audio.c		  mpeg4 音频编解码器的函数实现
+	mpeg4audio.h		  mpeg4 音频编解码器的函数声明
+	mpeg4data.h			  mpeg4 音视频编解码器的公用的函数声明及数据结构定义
+	mpeg4video.c		  mpeg4 视频编解码器的函数实现
+	mpeg4video.h		  mpeg4 视频编解码器的函数的声明及先关数据结构的定义
+	mpeg4videodec.c		  mpeg4 视频解码器的函数实现
+	mpeg4videoenc.c		  mpeg4 视频编码器的函数实现
+'''
+* libavformat
+
+	本目录主要存 放 FFMPEG 支持 的各种媒体格 式 MUXER/DEMUXER 和数据流协议 的定义和实现 文件以及 ffmpeg 解复用 相关的数据结 构及函数定义
+
+'''
+		文件	 			简要说明
+	allformats.c	简单注册类函数
+	avformat.h		文件和媒体格式相关函数声明和数据结 构定义
+	avio.c			无缓冲 IO 相关函数实现
+	avio.h			无缓冲 IO 相关结构定义和函数声明
+	aviobuf.c		有缓冲数据 IO 相关函数实现
+	cutils.c		简单的字符串操作函数
+	utils_format.c	文件和媒体格式相关的工具函数的实现
+	file.c			文件 io 相关函数
+	……				其他相关媒体流 IO 的函数和数据结构实 现文件。 如：rtsp、http 等。
+	avi.c			AVI 格式的相关函数定西
+	avi.h			AVI 格式的相关函数声明及数据结构定义
+	avidec.c		AVI 格式 DEMUXER 相关函数定义
+	avienc.c		AVI 格式 MUXER 相关函数定义
+	……				其他媒体格式的 muxer/demuxer 相关函 数及数据结构定义和声明文件
+'''
+
+* libavutil
+
+	主要存放 ffmpeg 工具类 函数的定义
+
+'''
+	avutil.h		简单的像素格式宏定义
+	bswap.h			简单的大小端转换函数的实现
+	commom.h		公共的宏定义和简单函数的实现
+	mathematics.c	数学运算函数实现
+	rational.h		分数相关表示的函数实现
+'''

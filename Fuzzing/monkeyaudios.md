@@ -91,6 +91,35 @@ so stubid 。
 
 afl-cov
 
+动态调试ffmpeg， 看编解码ape 经过了哪些function
+审计这两个地方的代码 会有什么逻辑漏洞、二进制漏洞
+demux 、 decode
+
+### 文件格式
+
+* struct AVFormatContext
+
+### demux
+
+AVFormatContext
+{
+	/**
+     * I/O context.
+     *
+     * - demuxing: either set by the user before avformat_open_input() (then
+     *             the user must close it manually) or set by avformat_open_input().
+     * - muxing: set by the user before avformat_write_header(). The caller must
+     *           take care of closing / freeing the IO context.
+     *
+     * Do NOT set this field if AVFMT_NOFILE flag is set in
+     * iformat/oformat.flags. In such a case, the (de)muxer will handle
+     * I/O in some other way and this field will be NULL.
+     */
+	AVIOContext *pb;
+}
+
+
+### decode
 # 联系方式
 	https://monkeysaudio.com/contact.html
 	mail@monkeysaudio.com

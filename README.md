@@ -52,7 +52,66 @@ TODO:
 
 ## 漏洞信息来源
 
-	RSS、相关博文
+### 安全会议
+
+  * BlackHat
+
+  > https://www.blackhat.com
+  > 这次BlackHat USA的议题也陆续公开了：https://www.blackhat.com/us-19/briefings/schedule/index.html
+
+  * OffensiveCon
+
+  > https://www.offensivecon.org/
+  > 会后，一般是由演讲者选择是否公开ppt，多数人是在Twitter上公开的，官网上我没找到资源（https://github.com/riusksk/SecConArchive/tree/master/OffensiveCon2019），所以之前收集的ppt都是从twitter上扒下来的。
+
+  * HITB (Hack In The Box)
+
+  > https://conference.hitb.org/
+  > 这几天HITB刚在荷兰阿姆斯特丹举办完，议题PPT也一并公开(https://conference.hitb.org/hitbsecconf2019ams/materials/)。
+
+  * InfiltrateCon
+
+  > https://infiltratecon.com
+  >今年的议题涉及Chrome RCE、iOS与Android提权、Pwn TEE、浏览器JS Fuzzing等等，只能坐等官方公开PPT了。
+
+  * Chaos Communication Congress(C3)
+
+  > https://www.ccc.de/
+  > 这些议题只有演讲视频公开，没有PPT，官方会放在https://media/ccc.de，可在线或下载观看。
+  > 都是在每年的12月份举办，2019的还有半年呢……
+
+  * CanSecWest
+
+  > https://cansecwest.com
+  > CanSecWest都是与Pwn2Own一块出现的，以前议题PPT都是放在https://www.slideshare.net/上分享，但从2018年开始又不搞了。
+  > 每年议题不多，但质量还是可以的，不过感觉这两年的质量略有下降。
+  > 今年3月的议题也没看到有下载，也是混Twitter找ppt的，只看了《vs com.apple.security.sandbox》这个议题，今年我感兴趣的议题没几个，大家根据自己喜好选择吧。
+
+  * MOSEC 移动安全技术峰会
+
+  > http://mosec.org
+  > MOSEC是从2015年开始举办的，由盘古与韩国POC联合举办，聚集移动安全领域，包括Android、iOS、IoT以及无线电等领域。虽然起步晚，但议题干货满满的，应该是目前国内最好的安全会议了。
+  > 今年的议题也已经陆续公开了，包括iOS越狱、Android提权、LTE、基带、卫星系统等等。
+  > 官网是不公开大会的议题PPT，由演讲者选择，所以想学习的同学，可能还是得去参会。
+
+  * POC
+
+  > http://powerofcommunity.net/
+
+### 研究者团队、社区
+
+  * Dianne Hackborn
+    Google资深大牛
+
+    > https://www.jianshu.com/p/07b87084337f
+    > 关于Android四大组件深刻解读
+
+  * Twttier 
+
+  * 漏洞赏金计划、私有市场 每个国家都有
+      Hackone
+      
+      > https://github.com/B3nac/Android-Reports-and-Resources
 
 ## 漏洞挖掘工具
 
@@ -88,10 +147,7 @@ TODO:
      http://go.armis.com/hubfs/BlueBorne%20Technical%20White%20Paper.pdf 
      android.googlesource.com 
          system/bt 
-* 看别人家的 fuzz 思路
-* https://security.googleblog.com/
-* https://source.android.com/security/reports/Google_Android_Security_2018_Report_Final.pdf
-* https://www.blog.google/products/android/celebrating-sweet-decade-android/
+         
 ## Mark
 wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
 
