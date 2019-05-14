@@ -13,7 +13,7 @@ https://blog.csdn.net/leixiaohua1020/article/details/26838535
 	AVPacket -> 
 	Video? -> 
 	Audio? ->
-	avcodec_decode_video4()-> 
+	avcodec_decode_video4()-  > 
 	AVFrame -> 
 	filter_encode_write_frame() -> 
 	flush_encoder() ->

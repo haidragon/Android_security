@@ -101,24 +101,159 @@ demux 、 decode
 
 ### demux
 
-AVFormatContext
+ape 除去 debug 模式 还有四个demux函数
+---------
+ape_probe 用 AV_RL16 取 AVProbeData 结构中 4字节 为version，取p-buf里 前8字节，MKTAG是否为'M', 'A', 'C', ' '
+---------
+ape_read_header 读取 AVFormatContext 结构的 s
+首先用avio_tell函数同步s->pb中 avio_tell函数如下所示：
+'''
+static av_always_inline int64_t avio_tell(AVIOContext *s)
 {
-	/**
-     * I/O context.
-     *
-     * - demuxing: either set by the user before avformat_open_input() (then
-     *             the user must close it manually) or set by avformat_open_input().
-     * - muxing: set by the user before avformat_write_header(). The caller must
-     *           take care of closing / freeing the IO context.
-     *
-     * Do NOT set this field if AVFMT_NOFILE flag is set in
-     * iformat/oformat.flags. In such a case, the (de)muxer will handle
-     * I/O in some other way and this field will be NULL.
-     */
-	AVIOContext *pb;
+    return avio_seek(s, 0, SEEK_CUR);
 }
+'''
+调用avio_seek，寻找s current 位置，找到同步标识位置，存入ape->junklength（int64_t）,avio_rl32 函数的功能应该是从pb读取4byte，
+接下来判断 ape里 fileversion。大于3980时，读取 padding1、descriptorlength、headerlength、seektablelength、wavheaderlength、audiodatalength、audiodatalength_high、wavtaillength。
+读取pb里，存取的md5值，这个文件的md5值，
+然后，
+'''
+if (ape->descriptorlength > 52)
+            avio_skip(pb, ape->descriptorlength - 52);
+'''
+如果ape->descriptorlength 描述的长度大于52，从 descriptorlength 指向的地方之后读取头部信息
+/
+读取信息如下所示
+'''
+	/* Read header data */
+	ape->compressiontype      = avio_rl16(pb);
+	ape->formatflags          = avio_rl16(pb);
+	ape->blocksperframe       = avio_rl32(pb);
+	ape->finalframeblocks     = avio_rl32(pb);
+	ape->totalframes          = avio_rl32(pb);
+	ape->bps                  = avio_rl16(pb);
+	ape->channels             = avio_rl16(pb);
+	ape->samplerate           = avio_rl32(pb);
+'''
+如果ape fileversion < 3980
+
+'''
+	ape->descriptorlength = 0;
+	ape->headerlength = 32;
+	ape->compressiontype      = avio_rl16(pb);
+	ape->formatflags          = avio_rl16(pb);
+	ape->channels             = avio_rl16(pb);
+	ape->samplerate           = avio_rl32(pb);
+	ape->wavheaderlength      = avio_rl32(pb);
+	ape->wavtaillength        = avio_rl32(pb);
+	ape->totalframes          = avio_rl32(pb);
+	ape->finalframeblocks     = avio_rl32(pb);
+'''
+当ape fileversion 小于这么多的时候，进行一些判断与赋值操作，我猜应该是因为小于3980的 头部格式已经确定很久的原因吧。
+
+先看 大于3980的吧 
+
+首先，获取ape->frames sizeof(APEFrame)的内存，然后，得到ape->firstframe指向的位置，设置ape->currentframe = 0;
+### ape格式
+ape文件头的数据存储形式受版本号fileversion和格式标志位 formatflags影响
+
+'''
+	char			magic[4]		"MAC" ape文件标志，第四位是空格
+	init16_t		fileversion 	ape版本号，其值在3800-3990之间？有check吗
+
+	之后的数据存储结构分两种 fileversion >= 3980的和fileversion < 3980
+
+	int16_t         	padding1                                    
+	int32_t          	descriptorlength
+	int32_t          	headerlength
+	int32_t          	seektablelength
+	int32_t          	wavheaderlength
+	int32_t          	audiodatalength
+	int32_t          	audiodatalength_high
+	int32_t          	wavtaillength
+	uint8_t          	md5[16]
+
+	若descriptorlength > 52，需要从当前位置往后跳过(descriptorlength - 52)个字节，现阶段descriptorlength其实都等于52 
+
+	uint16_t           compressiontype                                             压缩等级：1000-fast；2000-normal；3000-high；4000-extra high；5000-insane
+
+	uint16_t           formatflags
+	uint32_t           blocksperframe
+	uint32_t           finalframeblocks
+	uint32_t           totalframes
+	uint16_t           bps
+	uint16_t           channels
+	uint32_t           samplerate
+
+	若fileversion < 3980，当然肯定大于3800的，因为这里涉及到大量的if条件讨论，
+
+	uint16_t           compressiontype
+	uint16_t           formatflags
+	uint16_t           channels
+	uint16_t           samplerate
+	uint32_t           wavheaderlength
+	uint32_t           wavtaillength
+	uint32_t           totalframes
+	uint32_t           finalframeblocks
+
+	之后的数据存储形式就和formatflags有关了，先定义几个宏，用于判断formatflags对应位上是0还是1
+
+	#define    MAC_FORMAT_FLAG_8_BIT                           1          // is 8_bit[OBSOLETE]
+	#define    MAC_FORMAT_FLAG_CRC                             2         // uses the new CRC32 error detection[OBSOLETE]
+	#define    MAC_FORMAT_FLAG_HAS_PEAK_LEVEL                  4        //  uint32 nPeakLevelafter the header[OBSOLETE]
+	#define    MAC_FORMAT_FLAG_24_BIT                          8         // is 24_bit[OBSOLETE]
+	#define    MAC_FORMAT_FLAG_HAS_SEEK_ELEMENTS               16       // has the number of seek elements after the peak level
+	#define    MAC_FORMAT_FLAG_CREATE_WAV_HEADER               32      // create the wave header on decompression (not stored)
+
+	ape->descriptorlength = 0;
+	ape->headerlength = 32;
+	if (ape->formatflags & MAC_FORMAT_FLAG_HAS_PEAK_LEVEL) {
+	        avio_skip(pb, 4); /* Skip the peak level */
+	        ape->headerlength += 4;
+	    }
+	    if (ape->formatflags & MAC_FORMAT_FLAG_HAS_SEEK_ELEMENTS) {
+	        ape->seektablelength = avio_rl32(pb);
+	        ape->headerlength += 4;
+	        ape->seektablelength *= sizeof(int32_t);
+	    } else
+	        ape->seektablelength = ape->totalframes * sizeof(int32_t);
+	    if (ape->formatflags & MAC_FORMAT_FLAG_8_BIT)
+	        ape->bps = 8;
+	    else if (ape->formatflags & MAC_FORMAT_FLAG_24_BIT)
+	        ape->bps = 24;
+	    else
+	        ape->bps = 16;
+	    if (ape->fileversion >= 3950)
+	        ape->blocksperframe = 73728 * 4;
+	    else if (ape->fileversion >= 3900 || (ape->fileversion >= 3800  && ape->compressiontype >= 4000))
+	        ape->blocksperframe = 73728;
+	    else
+	        ape->blocksperframe = 9216;
+	    /* Skip any stored wav header */
+	    if (!(ape->formatflags & MAC_FORMAT_FLAG_CREATE_WAV_HEADER))
+	        avio_skip(pb, ape->wavheaderlength);
+	里面有几个自定义的函数，其实已经可以猜出其意思。avio_skip是跳过字节，avio_rl32是读32bit即4字节，并用小端方式算出其值，之后还会出现avio_r8就是读一个字节。
+	好了到此为止已经把fileversion的两种情况的数据存储结构分析清楚了
+	ape->totalsamples = ape->finalframeblocks;
+	if(ape->totalframes > 1)
+	    ape->totalsamples += ape->blocksperframe * (ape->totalframes - 1);
+
+	if(ape->seektablelength > 0){
+	    ape->seekable = malloc(ape->seektablelength);
+	    for(i = 0;i < ape->seektablelength / sizeof(uint32_t);i++)
+	        ape->seektable[i] = avio_rl32(pb);
+	    if(ape->fileversion < 3810){
+	        ape->bittable = malloc(ape->totalframes);
+	        for(i = 0;i < ape->totalframes;i++)
+	            ape->bittable[i] = avio_r8(pb);
+	    }
+	}
+	主要是把seektable和bittable的表项解析出来，而seektable在实现seek跳转的时候非常重要。其中pb是文件指针
 
 
+
+
+'''
 ### decode
 # 联系方式
 	https://monkeysaudio.com/contact.html

@@ -110,7 +110,7 @@ TODO:
 
   * 漏洞赏金计划、私有市场 每个国家都有
       Hackone
-      
+
       > https://github.com/B3nac/Android-Reports-and-Resources
 
 ## 漏洞挖掘工具
@@ -147,7 +147,10 @@ TODO:
      http://go.armis.com/hubfs/BlueBorne%20Technical%20White%20Paper.pdf 
      android.googlesource.com 
          system/bt 
-         
+
+### CTF以及Android安全基础
+* https://mobisec.reyammer.io/challs
+
 ## Mark
 wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
 

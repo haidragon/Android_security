@@ -50,5 +50,14 @@ com.irccloud.android.activity.ShareChooserActivity被导出，并设计为允许
                 //...
 '''
 
+
+# [IRCCloud Android] Opening arbitrary URLs/XSS in SAMLAuthActivity
+com.irccloud.android.activity.SAMLAuthActivity隐式导出，
 '''
+if (getIntent() == null || !getIntent().hasExtra("auth_url")) {
+    finish();
+    return;
+}
+getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
+this.mWebView.loadUrl(getIntent().getStringExtra("auth_url"));
 '''
