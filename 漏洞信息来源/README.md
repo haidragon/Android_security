@@ -1,8 +1,39 @@
 # 漏洞信息来源
 
 ## 漏洞信息来源
+RSS、相关博文 【RSS订阅】TODO 推送吧
 
-* RSS、相关博文 【RSS订阅】TODO 推送吧
+### Android知识的正确基础
+ref: https://www.imooc.com/article/50499
+* 书
+
+> 读书。请一定要读书。这是为了打好Android知识的正确基础。
+
+1. Mark Murphy的《The Busy Coder’s Guide to Android Development》
+
+2. Android Design
+	《Devices and Displays》
+	ref: http://developer.android.com/design/style/devices-displays.html
+	《Touch Feedback 》
+	ref: http://developer.android.com/design/style/touch-feedback.html
+	《Metrics and Grids》
+	《Iconography》
+	Best Practices for User Experience & UI (必读)
+	Best Practices for Performance
+	Displaying Bitmaps Efficiently
+	Adding Animations (也可见于NineOldAndroids库)
+	Tools help
+	SDK Samples
+
+* 订阅博客，通过RSS参与stackoverflow社区。
+
+1. STACKOVERFLOW
+	CommonsWare（Mark Murphy)，Dianne Hackborn，Romain Guy，Reto Meier，Trevor Johns，Roman Nurik，Adam Powell
+
+2. 博客
+	
+> https://android-developers.googleblog.com 
+	这个博客的文章非常值得浏览
 
 ## 漏洞研究风向标
 

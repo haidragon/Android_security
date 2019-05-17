@@ -52,6 +52,39 @@ TODO:
 
 ## 漏洞信息来源
 
+RSS、相关博文 【RSS订阅】TODO 推送吧
+
+### Android知识的正确基础
+
+* 书
+
+> 读书。请一定要读书。这是为了打好Android知识的正确基础。
+
+1. Mark Murphy的《The Busy Coder’s Guide to Android Development》
+
+2. Android Design
+  《Devices and Displays》
+  《Touch Feedback 》
+  《Metrics and Grids》
+  《Iconography》
+  Best Practices for User Experience & UI (必读)
+  Best Practices for Performance
+  Displaying Bitmaps Efficiently
+  Adding Animations (也可见于NineOldAndroids库)
+  Tools help
+  SDK Samples
+
+* 订阅博客，通过RSS参与stackoverflow社区。
+
+1. STACKOVERFLOW
+  CommonsWare（Mark Murphy)，Dianne Hackborn，Romain Guy，Reto Meier，Trevor Johns，Roman Nurik，Adam Powell
+
+2. 博客
+  
+> https://android-developers.googleblog.com 
+  这个博客的文章非常值得浏览
+
+
 ### 安全会议
 
   * BlackHat
@@ -104,6 +137,7 @@ TODO:
     Google资深大牛
 
     > https://www.jianshu.com/p/07b87084337f
+
     > 关于Android四大组件深刻解读
 
   * Twttier 
@@ -153,7 +187,6 @@ TODO:
 
 ## Mark
 wrike (lib/armeabi-v7a/libnpl-tls.so,execv，Musigy::Platform::PID __fastcall Musigy::Platform::SpawnProcess,涉及到c++ name mangling ref https://blog.csdn.net/yaoyutian/article/details/55209963。类似于Jni，需要自己逆出虚表，手动调)
-
 Mico apk里面的 
 
 Lcom/facebook/ads/internal/hb b（unzip以及dex）

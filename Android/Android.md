@@ -22,6 +22,97 @@
 ### 5 Linux Kernel 
 ### 6 Power Management 
 
+1. 系统应用层
+-----------
+Android 配备一套核心应用程序，用于电子邮件、短信、日历、互联网浏览、联系人等等。包括在平台上的应用程序在用户选择安装的应用程序中没有特殊的状态。因此，第三方应用程序可以成为用户默认的Web浏览器、SMS，甚至是默认的键盘（一些例外适用，例如系统的设置app）。
+系统应用程序既为用户提供日常生活中常用应用程序，又为提供开发人员提供了可以直接调用系统应用的关键功能。
+
+2. Java API 框架
+-----------
+Android OS的整个功能集可以通过用Java语言编写的API来获得。这些API构成了通过简化核心模块化系统组件和服务的重用来创建Android应用程序所需的构建模块，其中包括：
+
+* 一个丰富且可扩展的View System： 可以使用它来构建应用程序的UI，包括列表，网格，文本框，按钮，甚至可嵌入的Web浏览器；
+
+	ref: https://developer.android.google.cn/guide/topics/ui/declaring-layout.html
+
+	xml中声明UI元素
+
+	运行时实例化布局元素
+
+	编写XML 
+		使用Android XML词汇，来进行编写
+		在 XML 中声明布局后，请在您的 Android 项目 res/layout/ 目录中以 .xml 扩展名保存文件。
+
+	加载XML资源
+		编译应用时，每个XML布局文件都会编译到一个View资源中。 在Activity.onCreate（）回调实现中从应用代码加载布局资源。通过调用 setContentView()，以 R.layout.layout_file_name 形式向其传递对布局资源的引用来执行此操作。例如，如果您的 XML 布局保存为 main_layout.xml，则需要像下面这样为您的 Activity 加载该布局：
+		'''
+		public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.main_layout);
+		}
+		'''
+
+* Resource Manager： 用于访问非编码资源，如本地字符串，图形，和布局文件；
+	
+	ref:https://developer.android.google.cn/guide/topics/resources/overview.html
+
+	外部化资源，例如图像和应用代码中的字符串，有利于单独维护这些资源。此外，通过外部化资源，您还可以提供支持特定设备配置的备用资源。为了提供与不同配置的兼容性，必须使用各种按类型和配置对资源进行分组的子目录，对项目res/目录中的资源加以阻止。
+
+	提供资源
+	访问资源
+	处理运行时变更
+	本地化
+	复杂的XML资源
+	资源类型
+
+* Notification Manager： 为应用程序提供在状态栏中显示自定义的消息提醒；
+
+	ref:https://developer.android.google.cn/guide/topics/ui/notifiers/notifications.html
+
+	在应用的界面之外显示的信息，旨在向用户提供提醒、来自他人的通信信息或应用中的其他实时信息。用户可以点按通知来打开应用，也可以直接在通知中执行某项操作。
+
+* Activity Manager： 负责管理应用程序的生命周期并提供一个通用的导航返回栈；
+
+	ref:https://developer.android.google.cn/guide/components/activities.html
+
+
+
+* Content Providers： 可让应用访问其他应用的数据，例如通讯录应用，或共享自己的数据。
+	
+	ref:https://developer.android.google.cn/guide/topics/providers/content-providers.html
+
+	内容提供程序管理对结构化数据集的访问，封装数据，并提供用于定义数据安全性的机制。 内容提供程序是连接一个进程中的数据与另一个进程中运行的代码的标准界面。
+
+开发人员可以完全访问Android系统应用程序，从而复用系统提供的框架API。
+
+3. Native C/C++库
+-----------
+许多核心的Android系统组件和服务（如ART和HAL）都是使用本地代码构建的，需要使用C和C ++编写的本机库。 Android平台提供Java框架API以将这些本地库中的一些功能展示给应用程序。 例如，您可以通过Android框架的Java OpenGL API访问OpenGL ES，以添加对在应用程序中绘制和操作2D和3D图形的支持。
+
+如果项目中需要C或C ++代码的应用程序，可以使用Android NDK直接从本机代码访问其中一些本地平台库。
+
+4. Android运行时
+-----------
+
+ref: https://source.android.com/devices/tech/dalvik/index.html
+对于运行 Android 5.0（API级别21）或更高版本的设备，每个应用都在其自己的进程中运行，并且有其自己的ART。ART编写为通过执行DEX文件在低内存设备上运行多个虚拟机，DEX文件是一种专为Android设计的字节码格式，经过优化，使用的内存很少。编译工具链将Java 源代码编译为DEX字节码，使其能在Android平台上运行。
+ART 是 Android 上应用和部分系统服务使用的托管式运行时。ART及其前身Dalvik最初是专为Android项目打造。作为运行时的ART可执行Dalvik可执行文件并遵循Dex字节码规范。
+ART的一些主要特点包括以下几点：
+
+	提前（AOT）和即时（JIT）编译；
+
+	优化的垃圾收集（GC）；
+
+	更好的调试支持，包括专用采样分析器，详细的诊断异常和崩溃报告，以及设置观察点以监控特定领域的能力；
+
+在Android版本5.0（API级别21）之前，Dalvik是Android运行时。如果应用在ART上运行良好，那么它也可以在Dalvik上运行，但反过来可能并非如此。
+
+Android还包含一组核心运行时库，它们提供Java API框架使用的Java编程语言的大部分功能，甚至包括一些Java 8语言功能。
+
+5. 硬件抽象层(HAL)
+------------
+硬件抽象层提供标准界面，向更高级别JavaAPI框架显示设备硬件功能。HAL包含多个库模块，其中每个模块都为特定类型的硬件组件实现一个界面，例如相机或蓝牙模块。当框架API要求访问设备硬件时，Android系统将为该硬件时，Android系统将为该硬件组件加载库模块。
+
 ### Android应用层
 主要的应用组件：
 AndroidManifest、Intent、Activity、BroadcastReceiver、Service、Content Provider。
@@ -37,6 +128,23 @@ AndroidManifest、Intent、Activity、BroadcastReceiver、Service、Content Prov
 一种消息对象，其中包含要执行操作的相关信息，将执行操作的目标组件信息（可选），以及其他一些（对接收方可能非常关键的）标识位或支持行信息。比如在一个邮件中点击链接来启动浏览器。
 这个类，类似于IPC or RPC。如果涉及权限，Android运行时将作为一个参考监视器，对Intent执行权限检查。
 Manifest文件中声明特定的组件时，可以指明一个Intent Filter，来定义端点处理的标准。
+* intent.putExtra()
+
+  放入自己要传递的数据，然后再另一个地方使用getxxx()来获取
+
+* 开启 Activity
+
+	'''java
+		Intent intent1 = getIntent(); //此方法在MainActivity中调用
+		Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
+	'''
+
+1. getIntent()
+	
+2. new Intent(MainActivity.this, MainActivity.class)
+ 
+ intent1 不会开启一个全新的Activity，用intent2去startActivity() 那么会开启一个全新的Activity 。
+
 
 #### Activity
 Activity是一种面向用户的应用组件或用户界面。基于Activity基类，包括一个窗口和相关的UI元素。Activity底层管理由被称为Activity管理服务的组件进行处理。这个组件也处理应用之间或应用内部用于调用Activity的发送Intent。
